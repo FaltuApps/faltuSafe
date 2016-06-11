@@ -41,10 +41,14 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('PlaylistsCtrl', function($scope, FaltuList) {
+.controller('PlaylistsCtrl', function($scope, FaltuList, $ionicModal) {
         $scope.playlists = FaltuList.playlists;
-    })
-    .controller('PlaylistCtrl', function($scope, $stateParams, FaltuList, $ionicModal) {
+
+          $scope.addNewProcessing = false;
+        $scope.myData = {
+          title:'',
+          detail:''
+        }
 
         $ionicModal.fromTemplateUrl('templates/addNew.html', {
             scope: $scope
@@ -62,13 +66,30 @@ angular.module('starter.controllers', [])
             $scope.addNewModal.show();
         };
 
+        $scope.addNew = function(title, detail) {
 
+            if (!$scope.addNewProcessing && title != "" && detail != "") {
+                $scope.addNewProcessing = true;
+                FaltuList.addNew(title, detail)
+                $scope.closeAddNew();
+                $scope.myData.title = '';
+                $scope.myData.detail = '';
+            };
+
+            $scope.addNewProcessing = false;
+        }
+
+    })
+    .controller('PlaylistCtrl', function($scope, $stateParams, FaltuList, $ionicModal) {
+
+      
 
         var playlistName = function() {
             for (var i = 0; i < FaltuList.playlists.length; i++) {
                 if (FaltuList.playlists[i].id == ($stateParams.playlistId)) {
 
                     $scope.title = FaltuList.playlists[i].title;
+                    $scope.detail = FaltuList.playlists[i].detail;
                     break;
                 };
             };
@@ -84,15 +105,14 @@ angular.module('starter.controllers', [])
 
     }).service('FaltuList', ['$stateParams', function($stateParams) {
         var self = this;
-        self.playlists = [
-            { title: 'Reggae', id: 1 },
-            { title: 'Chill', id: 2 },
-            { title: 'Dubstep', id: 3 },
-            { title: 'Indie', id: 4 },
-            { title: 'Rap', id: 5 },
-            { title: 'Cowbell', id: 6 }
-        ];
+        var data = angular.fromJson(localStorage.getItem('playlists'));
+        self.playlists = data == null ? [] : data;
 
+        self.addNew = function(title, detail) {
 
+            self.playlists.push({ title: title, detail: detail, id: self.playlists.length + 1 });
+
+            localStorage.setItem('playlists', angular.toJson(self.playlists))
+        }
 
     }]);

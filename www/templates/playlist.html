@@ -1,9 +1,10 @@
 <ion-view view-title="{{title}}">
 <ion-nav-buttons side="right">
    <!-- Toggle left side menu -->
-   <button ng-click="openAddNew()"  class="button"> Add New {{title}}</button>
+   <button ng-click="openAddNew()"  class="button"> edit {{title}}</button>
   </ion-nav-buttons>
   <ion-content>
-    <h1>Playlist</h1>
+    <h2>{{title}}</h2>
+	<h3>{{detail}}</h3>
   </ion-content>
 </ion-view>

@@ -1,8 +1,13 @@
 <ion-view  view-title="{{playlist.title}}">
+<ion-nav-buttons side="right">
+   <!-- Toggle left side menu -->
+   <button ng-click="openAddNew()"  class="button"> Add New {{title}}</button>
+  </ion-nav-buttons>
   <ion-content>
     <ion-list>
       <ion-item ng-repeat="playlist in playlists" ui-sref="app.single({playlistId:playlist.id})">
         {{playlist.title}}
+        <span>{{playlist.detail}}</span>
       </ion-item>
     </ion-list>
   </ion-content>
