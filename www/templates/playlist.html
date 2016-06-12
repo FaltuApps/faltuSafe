@@ -1,10 +1,49 @@
 <ion-view view-title="{{title}}">
 <ion-nav-buttons side="right">
    <!-- Toggle left side menu -->
-   <button ng-click="openAddNew()"  class="button"> edit {{title}}</button>
+   <button ng-click="openEdit('{{title}}', '{{detail}}')"  class="button"> edit {{title}}</button>
   </ion-nav-buttons>
   <ion-content>
     <h2>{{title}}</h2>
 	<h3>{{detail}}</h3>
+
+
+
+
+<script id="edit-modal.html" type="text/ng-template">
+
+    <ion-modal-view >
+  <ion-header-bar>
+    <h1 class="title">Edit {{title}}</h1>
+    <div class="buttons">
+      <button class="button button-clear close" ng-click="closeEdit()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="save(myData.title, myData.detail)">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Title</span>
+          <input type="text"   ng-model="myData.title">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Details</span>
+          <input type="text"  ng-model="myData.detail">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Save</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
+
+
+</script>
+
+
+
+
+
   </ion-content>
 </ion-view>

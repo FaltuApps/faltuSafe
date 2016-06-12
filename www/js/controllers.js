@@ -42,18 +42,20 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistsCtrl', function($scope, FaltuList, $ionicModal) {
+
         $scope.playlists = FaltuList.playlists;
 
-          $scope.addNewProcessing = false;
+        $scope.addNewProcessing = false;
         $scope.myData = {
-          title:'',
-          detail:''
+            title: '',
+            detail: ''
         }
 
-        $ionicModal.fromTemplateUrl('templates/addNew.html', {
+        // $ionicModal.fromTemplateUrl('templates/addNew.html', {
+        $ionicModal.fromTemplateUrl('my-modal.html', {
             scope: $scope
-        }).then(function(modal) {
-            $scope.addNewModal = modal;
+        }).then(function(popup) {
+            $scope.addNewModal = popup;
         });
 
         // Triggered in the add new modal to close it
@@ -79,10 +81,51 @@ angular.module('starter.controllers', [])
             $scope.addNewProcessing = false;
         }
 
+
+
+
     })
     .controller('PlaylistCtrl', function($scope, $stateParams, FaltuList, $ionicModal) {
+        $scope.myData = {
+            title: '',
+            detail: ''
+        }
 
-      
+        /*==================================
+        =            Edit modal            =
+        ==================================*/
+        /*=====  End of Edit modal  ======*/
+        // $ionicModal.fromTemplateUrl('templates/addNew.html', {
+        $ionicModal.fromTemplateUrl('edit-modal.html', {
+            scope: $scope
+        }).then(function(editPopup) {
+            $scope.editModal = editPopup;
+        });
+
+        // Triggered in the add new modal to close it
+        $scope.closeEdit = function() {
+            $scope.editModal.hide();
+        };
+
+        // Open the add new modal
+        $scope.openEdit = function(title, detail) {
+
+
+            $scope.editModal.show();
+            $scope.myData.title = title;
+            $scope.myData.detail = detail;
+        };
+
+        $scope.save = function(title, detail) {
+
+            $scope.addNewProcessing = true;
+            FaltuList.edit(title, detail, $scope.id, $stateParams.playlistId)
+            $scope.closeEdit();
+            $scope.title = title;
+            $scope.detail = detail;
+            $scope.addNewProcessing = false;
+        }
+
 
         var playlistName = function() {
             for (var i = 0; i < FaltuList.playlists.length; i++) {
@@ -90,6 +133,7 @@ angular.module('starter.controllers', [])
 
                     $scope.title = FaltuList.playlists[i].title;
                     $scope.detail = FaltuList.playlists[i].detail;
+                    $scope.id = FaltuList.playlists[i].id;
                     break;
                 };
             };
@@ -113,6 +157,22 @@ angular.module('starter.controllers', [])
             self.playlists.push({ title: title, detail: detail, id: self.playlists.length + 1 });
 
             localStorage.setItem('playlists', angular.toJson(self.playlists))
+        }
+
+        self.deleteOld = function(id, pageId) {
+            for (var i = 0; i < self.playlists.length; i++) {
+                if (self.playlists[i].id = pageId) {
+                    self.playlists.splice(self.playlists[i],1)
+                    break;
+                };
+            };
+            localStorage.setItem('playlists', angular.toJson(self.playlists));
+        }
+        self.edit = function (title, detail, id, pageId) {
+            
+            self.deleteOld(id, pageId);
+            self.addNew(title,detail);
+
         }
 
     }]);

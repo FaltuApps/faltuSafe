@@ -1,5 +1,8 @@
 {
   "name": "faltuSafe",
-  "app_id": "",
-  "gulpStartupTasks": ["sass", "watch"]
+  "app_id": "d3f71884",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ]
 }
