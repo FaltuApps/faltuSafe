@@ -81,7 +81,10 @@ angular.module('starter.controllers', [])
             $scope.addNewProcessing = false;
         }
 
-
+        $scope.deleteItem = function (id) {
+          FaltuList.playlists.splice(id, 1);
+          localStorage.setItem('playlists', angular.toJson(FaltuList.playlists));
+        }
 
 
     })
@@ -159,7 +162,7 @@ angular.module('starter.controllers', [])
             localStorage.setItem('playlists', angular.toJson(self.playlists))
         }
 
-        self.deleteOld = function(id, pageId) {
+        self.remove = function(id, pageId) {
             for (var i = 0; i < self.playlists.length; i++) {
                 if (self.playlists[i].id = pageId) {
                     self.playlists.splice(self.playlists[i],1)
@@ -170,7 +173,7 @@ angular.module('starter.controllers', [])
         }
         self.edit = function (title, detail, id, pageId) {
             
-            self.deleteOld(id, pageId);
+            self.remove(id, pageId);
             self.addNew(title,detail);
 
         }

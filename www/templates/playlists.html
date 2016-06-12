@@ -1,13 +1,15 @@
 <ion-view  view-title="{{playlist.title}}">
 <ion-nav-buttons side="right">
    <!-- Toggle left side menu -->
-   <button ng-click="openAddNew()"  class="button"> Add New {{title}}</button>
+   <button ng-click="openAddNew()"  class="button ion-plus-round"></button>
   </ion-nav-buttons>
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" ui-sref="app.single({playlistId:playlist.id})">
-        {{playlist.title}}
+      <ion-item ng-repeat="playlist in playlists" class="listItems" >
+       <a ui-sref="app.single({playlistId:playlist.id})"> {{playlist.title}}
         <span>{{playlist.detail}}</span>
+        </a>
+        <button class="button delete-btn ion-android-delete" ng-click="deleteItem({{$index}})" ></button>
       </ion-item>
     </ion-list>
 
@@ -19,7 +21,7 @@
   <ion-header-bar>
     <h1 class="title">Add new {{title}}</h1>
     <div class="buttons">
-      <button class="button button-clear close" ng-click="closeAddNew()">Close</button>
+      <button class="button button-clear close ion-close-round" ng-click="closeAddNew()"></button>
     </div>
   </ion-header-bar>
   <ion-content>

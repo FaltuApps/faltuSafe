@@ -1,7 +1,7 @@
 <ion-view view-title="{{title}}">
 <ion-nav-buttons side="right">
    <!-- Toggle left side menu -->
-   <button ng-click="openEdit('{{title}}', '{{detail}}')"  class="button"> edit {{title}}</button>
+   <button ng-click="openEdit('{{title}}', '{{detail}}')"  class="button ion-edit"> </button>
   </ion-nav-buttons>
   <ion-content>
     <h2>{{title}}</h2>
@@ -16,7 +16,7 @@
   <ion-header-bar>
     <h1 class="title">Edit {{title}}</h1>
     <div class="buttons">
-      <button class="button button-clear close" ng-click="closeEdit()">Close</button>
+      <button class="button button-clear close ion-close-round" ng-click="closeEdit()"></button>
     </div>
   </ion-header-bar>
   <ion-content>

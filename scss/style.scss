@@ -1,5 +1,16 @@
-.item-content{
-span{display: block;
-	font-size: 11px;
-	color: listen($dark, 50);}
+.listItems {
+	padding: 0 !important;
+    a {	
+    	display: block;
+        padding: 9px 15px;
+        @extend .col-80;
+        text-decoration: none;
+        color: $dark;
+        span {
+            display: block;
+            font-size: 11px;
+            color: lighten($dark, 50);
+            line-height: 10px;
+        }
+    }
 }
