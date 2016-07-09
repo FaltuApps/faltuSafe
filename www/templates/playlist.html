@@ -8,12 +8,13 @@
 	<h3>{{detail}}</h3>
 
 
+    <a ng-click="socialShare()" >share</a>
 
 
-<script id="edit-modal.html" type="text/ng-template">
+    <script id="edit-modal.html" type="text/ng-template">
 
-    <ion-modal-view >
-  <ion-header-bar>
+  <ion-modal-view >
+      <ion-header-bar>
     <h1 class="title">Edit {{title}}</h1>
     <div class="buttons">
       <button class="button button-clear close ion-close-round" ng-click="closeEdit()"></button>

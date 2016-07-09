@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngCordova'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -88,7 +88,7 @@ angular.module('starter.controllers', [])
 
 
     })
-    .controller('PlaylistCtrl', function($scope, $stateParams, FaltuList, $ionicModal) {
+    .controller('PlaylistCtrl', function($scope, $stateParams, FaltuList, $ionicModal, $cordovaSocialSharing) {
         $scope.myData = {
             title: '',
             detail: ''
@@ -141,7 +141,6 @@ angular.module('starter.controllers', [])
                 };
             };
         }
-
         var init = function() {
 
             playlistName()
@@ -149,6 +148,22 @@ angular.module('starter.controllers', [])
         }
 
         init();
+
+        var message = "Name:" +$scope.title + "other" + $scope.detail;
+
+        $scope.socialShare = function () {
+
+
+            alert("aa");
+            window.plugins.socialsharing.share(message, null, null, 'http://link');
+        }
+
+
+
+
+
+
+
 
     }).service('FaltuList', ['$stateParams', function($stateParams) {
         var self = this;
