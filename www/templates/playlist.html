@@ -1,16 +1,31 @@
-<ion-view view-title="{{title}}">
+<ion-view view-title="{{bank.name}}">
 <ion-nav-buttons side="right">
    <!-- Toggle left side menu -->
-   <button ng-click="openEdit('{{title}}', '{{detail}}')"  class="button ion-edit"> </button>
+   <button ng-click="openEdit(myData)"  class="button ion-edit"> </button>
   </ion-nav-buttons>
   <ion-content>
-    <h2>{{title}}</h2>
-	<h3>{{detail}}</h3>
+    <div class="bank-details"><img src="{{myData.bank.img}}" alt="">
+    <table>
+      <tbody>
+        <tr>
+          <td>Name</td>
+          <td>{{myData.title}}</td>
+        </tr>
+        <tr>
+          <td>Branch</td>
+          <td>{{myData.detail}}</td>
+        </tr>
+        <tr>
+          <td>Account No.</td>
+          <td>{{acc}}</td>
+        </tr>
+      </tbody>
+    </table>
 
-
-    <a ng-click="socialShare()" >share</a>
-
-
+<p class="tcenter">
+    <a class="share" ng-click="socialShare()" >Share</a>
+</p>
+    </div>
     <script id="edit-modal.html" type="text/ng-template">
 
   <ion-modal-view >
@@ -21,14 +36,19 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="save(myData.title, myData.detail)">
+    <form ng-submit="save(myData)">
       <div class="list">
+          <label class="item item-input">
+              <span class="input-label">Bank</span>
+              <select name="banks" ng-change="update()" ng-options="bank as bank.name for bank in banks" ng-model="myData.bank" id="">
+              </select>
+          </label>
         <label class="item item-input">
           <span class="input-label">Title</span>
           <input type="text"   ng-model="myData.title">
         </label>
         <label class="item item-input">
-          <span class="input-label">Details</span>
+          <span class="input-label">Branch</span>
           <input type="text"  ng-model="myData.detail">
         </label>
         <label class="item">

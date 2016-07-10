@@ -9262,7 +9262,7 @@ a.button {
   flex: 0 0 75%;
   max-width: 75%; }
 
-.col-80, .listItems a {
+.col-80 {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 80%;
   -moz-box-flex: 0;
@@ -9294,7 +9294,7 @@ a.button {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column; }
-    .responsive-sm .col, .responsive-sm .col-10, .responsive-sm .col-20, .responsive-sm .col-25, .responsive-sm .col-33, .responsive-sm .col-34, .responsive-sm .col-50, .responsive-sm .col-66, .responsive-sm .col-67, .responsive-sm .col-75, .responsive-sm .col-80, .responsive-sm .listItems a, .listItems .responsive-sm a, .responsive-sm .col-90 {
+    .responsive-sm .col, .responsive-sm .col-10, .responsive-sm .col-20, .responsive-sm .col-25, .responsive-sm .col-33, .responsive-sm .col-34, .responsive-sm .col-50, .responsive-sm .col-66, .responsive-sm .col-67, .responsive-sm .col-75, .responsive-sm .col-80, .responsive-sm .col-90 {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
       -moz-box-flex: 1;
@@ -9315,7 +9315,7 @@ a.button {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column; }
-    .responsive-md .col, .responsive-md .col-10, .responsive-md .col-20, .responsive-md .col-25, .responsive-md .col-33, .responsive-md .col-34, .responsive-md .col-50, .responsive-md .col-66, .responsive-md .col-67, .responsive-md .col-75, .responsive-md .col-80, .responsive-md .listItems a, .listItems .responsive-md a, .responsive-md .col-90 {
+    .responsive-md .col, .responsive-md .col-10, .responsive-md .col-20, .responsive-md .col-25, .responsive-md .col-33, .responsive-md .col-34, .responsive-md .col-50, .responsive-md .col-66, .responsive-md .col-67, .responsive-md .col-75, .responsive-md .col-80, .responsive-md .col-90 {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
       -moz-box-flex: 1;
@@ -9336,7 +9336,7 @@ a.button {
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column; }
-    .responsive-lg .col, .responsive-lg .col-10, .responsive-lg .col-20, .responsive-lg .col-25, .responsive-lg .col-33, .responsive-lg .col-34, .responsive-lg .col-50, .responsive-lg .col-66, .responsive-lg .col-67, .responsive-lg .col-75, .responsive-lg .col-80, .responsive-lg .listItems a, .listItems .responsive-lg a, .responsive-lg .col-90 {
+    .responsive-lg .col, .responsive-lg .col-10, .responsive-lg .col-20, .responsive-lg .col-25, .responsive-lg .col-33, .responsive-lg .col-34, .responsive-lg .col-50, .responsive-lg .col-66, .responsive-lg .col-67, .responsive-lg .col-75, .responsive-lg .col-80, .responsive-lg .col-90 {
       -webkit-box-flex: 1;
       -webkit-flex: 1;
       -moz-box-flex: 1;
@@ -9818,8 +9818,6 @@ a.button {
 .listItems {
   padding: 0 !important; }
   .listItems a {
-    display: block;
-    padding: 9px 15px;
     text-decoration: none;
     color: #444; }
     .listItems a span {
@@ -9828,10 +9826,118 @@ a.button {
       color: #c4c4c4;
       line-height: 10px; }
 
+.tcenter {
+  text-align: center; }
+
+.share {
+  display: block;
+  padding: 8px 20px;
+  color: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 15px;
+  text-transform: uppercase;
+  background: darkblue; }
+
 .delete-btn {
   position: absolute;
   top: 0;
-  right: 0; }
+  right: 0;
+  height: 50px;
+  color: blue; }
+
+.mylist .list {
+  padding: 20px; }
+  .mylist .list .listItems {
+    border-left: 4px solid yellow;
+    margin-bottom: 10px;
+    text-transform: capitalize;
+    overflow: hidden;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; }
+    .mylist .list .listItems a {
+      padding: 0;
+      display: block; }
+      .mylist .list .listItems a .logo {
+        margin-right: 0px;
+        height: 50px;
+        width: 50px;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle; }
+        .mylist .list .listItems a .logo img {
+          display: block;
+          height: 30px;
+          margin: 0 auto; }
+      .mylist .list .listItems a .data {
+        display: table-cell;
+        padding: 9px 0;
+        width: 78%; }
+
+table {
+  position: relative;
+  z-index: 8;
+  text-align: left;
+  border-collapse: separate;
+  background: #fff;
+  margin: 20px auto;
+  border: 1px solid #858d99;
+  width: 90%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
+
+thead th {
+  font-family: 'Patua One', cursive;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  text-align: left;
+  padding: 20px;
+  border-top: 1px solid #858d99; }
+
+tbody tr td {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  color: #5f6062;
+  font-size: 13px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e0e0e0; }
+
+tbody tr:nth-child(2n) {
+  background: #f0f3f5; }
+
+tbody tr:last-child td {
+  border-bottom: none; }
+
+.bank-details {
+  text-align: center;
+  margin-top: 20px;
+  background: blue;
+  padding-top: 45px;
+  margin-top: 80px;
+  padding-bottom: 30px; }
+  .bank-details:before {
+    position: absolute;
+    content: "";
+    top: -20px;
+    display: block;
+    width: 150%;
+    background: blue;
+    border-radius: 50%;
+    height: 150px;
+    margin-left: -75px;
+    z-index: 1; }
+  .bank-details img {
+    margin-left: -35px;
+    left: 50%;
+    top: -45px;
+    position: absolute;
+    width: 70px;
+    z-index: 2; }
 
 .close {
   color: #444 !important; }

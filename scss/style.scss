@@ -1,9 +1,6 @@
 .listItems {
 	padding: 0 !important;
-    a {	
-    	display: block;
-        padding: 9px 15px;
-        @extend .col-80;
+    a {
         text-decoration: none;
         color: $dark;
         span {
@@ -13,4 +10,18 @@
             line-height: 10px;
         }
     }
+}
+.tcenter{
+  text-align: center;}
+.share{
+  display: block;
+  padding: 8px 20px;
+  color: #fff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 15px;
+  text-transform: uppercase;
+  background: darkblue;
 }

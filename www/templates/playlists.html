@@ -1,15 +1,19 @@
-<ion-view  view-title="{{playlist.title}}">
+<ion-view  view-title="Playlist">
 <ion-nav-buttons side="right">
    <!-- Toggle left side menu -->
    <button ng-click="openAddNew()"  class="button ion-plus-round"></button>
   </ion-nav-buttons>
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="playlist in playlists" class="listItems" >
-       <a ui-sref="app.single({playlistId:playlist.id})"> {{playlist.title}}
-        <span>{{playlist.detail}}</span>
+    <ion-list class="mylist">
+      <ion-item ng-repeat="playlist in playlists  track by $index" class="listItems "  >
+        <a ui-sref="app.single({playlistId:playlist.id})">
+          <span class="logo"><img src="{{playlist.bank.img}}" alt=""></span>
+          <div class="data">
+            {{playlist.title}}
+            <span>{{playlist.detail}}</span>
+          </div>
         </a>
-        <button class="button delete-btn ion-android-delete" ng-click="deleteItem({{$index}})" ></button>
+        <button class="button delete-btn ion-android-delete" ng-click="deleteItem({{playlist.id}})" ></button>
       </ion-item>
     </ion-list>
 
@@ -25,14 +29,19 @@
     </div>
   </ion-header-bar>
   <ion-content>
-    <form ng-submit="addNew(myData.title, myData.detail)">
+    <form ng-submit="addNew(myData)">
       <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Bank</span>
+          <select name="banks" ng-change="update()" ng-options="bank as bank.name for bank in banks" ng-model="myData.bank" id="">
+          </select>
+        </label>
         <label class="item item-input">
           <span class="input-label">Title</span>
           <input type="text" ng-model="myData.title">
         </label>
         <label class="item item-input">
-          <span class="input-label">Details</span>
+          <span class="input-label">Branch</span>
           <input type="text" ng-model="myData.detail">
         </label>
         <label class="item">

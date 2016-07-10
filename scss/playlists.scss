@@ -1,3 +1,42 @@
 .delete-btn{
 	position: absolute;top: 0;right: 0;
+	height: 50px;
+	color: blue;
+}
+.mylist {
+	.list {
+		padding: 20px;
+		.listItems {
+			border-left: 4px solid yellow;
+			margin-bottom: 10px;
+			text-transform: capitalize;
+			overflow: hidden;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			a{
+				padding: 0;
+				display: block;
+			.logo{
+				margin-right: 0px;
+				height: 50px;
+				width: 50px;
+				display: table-cell;
+				text-align: center;
+				vertical-align: middle;
+					img{
+						display: block;
+						height: 30px;
+						margin: 0 auto;
+					}
+				}
+				.data{
+					display: table-cell;
+					padding: 9px 0;
+					width: 78%;
+				}
+
+			}
+		}
+	}
 }

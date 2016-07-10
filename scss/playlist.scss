@@ -1,0 +1,82 @@
+
+table {
+  position: relative;
+  z-index: 8;
+  text-align: left;
+	border-collapse: separate;
+	background:#fff;
+	margin:20px auto;
+	border:1px solid #858d99;
+  width: 90%;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+thead th {
+	font-family: 'Patua One', cursive;
+	font-size:16px;
+	font-weight:400;
+	color:#fff;
+	text-align:left;
+	padding:20px;
+	border-top:1px solid #858d99;
+
+	&:first-child {
+	}
+
+	&:last-child {
+	}
+}
+
+tbody tr td {
+	font-family: 'Open Sans', sans-serif;
+	font-weight:400;
+	color:#5f6062;
+	font-size:13px;
+	padding:12px 20px;
+	border-bottom:1px solid #e0e0e0;
+
+}
+
+tbody tr:nth-child(2n) {
+	background:#f0f3f5;
+}
+
+tbody tr:last-child td {
+	border-bottom:none;
+	&:first-child {
+	}
+	&:last-child {
+	}
+}
+
+.bank-details{
+  text-align: center;
+  margin-top: 20px;
+  background: blue;
+  padding-top: 45px;
+  margin-top: 80px;
+  padding-bottom: 30px;
+  &:before{
+    position: absolute;
+    content: "";
+    top: -20px;
+    display: block;
+    width: 150%;
+    background: blue;
+    border-radius:50%;
+    height:150px;
+    margin-left: -75px;
+    z-index:1;
+  }
+  img{
+    margin-left: -35px;
+    left: 50%;
+    top: -45px;
+    position: absolute;
+    width:70px;
+    z-index: 2;
+
+  }
+}

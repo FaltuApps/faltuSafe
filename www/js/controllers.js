@@ -45,10 +45,17 @@ angular.module('starter.controllers', ['ngCordova'])
 
         $scope.playlists = FaltuList.playlists;
 
+    $scope.update = function() {
+        $scope.bank = $scope.myData.bank.name
+
+    }
+        $scope.banks = FaltuList.banks;
+    
         $scope.addNewProcessing = false;
         $scope.myData = {
             title: '',
-            detail: ''
+            detail: '',
+            bank:''
         }
 
         // $ionicModal.fromTemplateUrl('templates/addNew.html', {
@@ -68,32 +75,36 @@ angular.module('starter.controllers', ['ngCordova'])
             $scope.addNewModal.show();
         };
 
-        $scope.addNew = function(title, detail) {
+        $scope.addNew = function(data) {
 
-            if (!$scope.addNewProcessing && title != "" && detail != "") {
+            if (!$scope.addNewProcessing && data.title != "" && data.detail != "" && data.bank != "") {
                 $scope.addNewProcessing = true;
-                FaltuList.addNew(title, detail)
+                FaltuList.addNew(data);
                 $scope.closeAddNew();
                 $scope.myData.title = '';
                 $scope.myData.detail = '';
+                $scope.myData.bank = '';
             };
 
             $scope.addNewProcessing = false;
         }
 
         $scope.deleteItem = function (id) {
-          FaltuList.playlists.splice(id, 1);
+            for(var i = 0; i < FaltuList.playlists.length; i++ ){
+                if (FaltuList.playlists[i].id == id){
+
+                    FaltuList.playlists.splice(i, 1);
+                    break;
+                }
+            }
           localStorage.setItem('playlists', angular.toJson(FaltuList.playlists));
         }
 
 
     })
     .controller('PlaylistCtrl', function($scope, $stateParams, FaltuList, $ionicModal, $cordovaSocialSharing) {
-        $scope.myData = {
-            title: '',
-            detail: ''
-        }
-
+ 
+        $scope.banks = FaltuList.banks;
         /*==================================
         =            Edit modal            =
         ==================================*/
@@ -111,21 +122,20 @@ angular.module('starter.controllers', ['ngCordova'])
         };
 
         // Open the add new modal
-        $scope.openEdit = function(title, detail) {
+        $scope.openEdit = function(data) {
 
 
             $scope.editModal.show();
-            $scope.myData.title = title;
-            $scope.myData.detail = detail;
+            $scope.myData = data;
         };
 
-        $scope.save = function(title, detail) {
+        $scope.save = function(data) {
 
             $scope.addNewProcessing = true;
-            FaltuList.edit(title, detail, $scope.id, $stateParams.playlistId)
+            FaltuList.edit(data, $stateParams.playlistId)
             $scope.closeEdit();
-            $scope.title = title;
-            $scope.detail = detail;
+            $scope.myData = data;
+
             $scope.addNewProcessing = false;
         }
 
@@ -134,9 +144,8 @@ angular.module('starter.controllers', ['ngCordova'])
             for (var i = 0; i < FaltuList.playlists.length; i++) {
                 if (FaltuList.playlists[i].id == ($stateParams.playlistId)) {
 
-                    $scope.title = FaltuList.playlists[i].title;
-                    $scope.detail = FaltuList.playlists[i].detail;
-                    $scope.id = FaltuList.playlists[i].id;
+                    $scope.myData = FaltuList.playlists[i];
+
                     break;
                 };
             };
@@ -149,20 +158,12 @@ angular.module('starter.controllers', ['ngCordova'])
 
         init();
 
-        var message = "Name:" +$scope.title + "other" + $scope.detail;
+        var message = "Name: " +$scope.title + " Details: " + $scope.detail;
 
         $scope.socialShare = function () {
 
-
-            alert("aa");
-            window.plugins.socialsharing.share(message, null, null, 'http://link');
+            window.plugins.socialsharing.share(message, null, null, null);
         }
-
-
-
-
-
-
 
 
     }).service('FaltuList', ['$stateParams', function($stateParams) {
@@ -170,11 +171,42 @@ angular.module('starter.controllers', ['ngCordova'])
         var data = angular.fromJson(localStorage.getItem('playlists'));
         self.playlists = data == null ? [] : data;
 
-        self.addNew = function(title, detail) {
+        self.banks = [{
+            name: 'HDFC',
+            img: 'img/hdfc.png',
+            bid: 01
+        },{
+            name: 'YES BANK',
+            img: 'img/yes.png',
+            bid:02
+        },{
+            name: 'PUNJAB NATIONAL BANK',
+            img: 'img/pnb.png',
+            bid:03
+        }];
 
-            self.playlists.push({ title: title, detail: detail, id: self.playlists.length + 1 });
+        var uid = function (){
+            var uniqueId
+            if(localStorage.getItem('uid')== null){
+                localStorage.setItem('uid', 0)
+                uniqueId = localStorage.getItem('uid')
+            }else{
 
-            localStorage.setItem('playlists', angular.toJson(self.playlists))
+                uniqueId = parseInt(localStorage.getItem('uid')) + 1
+                localStorage.setItem('uid', uniqueId)
+            }
+
+            return uniqueId
+        }
+
+        self.addNew = function(data) {
+
+
+            self.playlists.push({ title: data.title, detail: data.detail, bank: data.bank, id: uid() });
+
+            localStorage.setItem('playlists', angular.toJson(self.playlists));
+
+
         }
 
         self.remove = function(id, pageId) {
@@ -182,15 +214,19 @@ angular.module('starter.controllers', ['ngCordova'])
                 if (self.playlists[i].id = pageId) {
                     self.playlists.splice(self.playlists[i],1)
                     break;
-                };
-            };
+                }
+            }
             localStorage.setItem('playlists', angular.toJson(self.playlists));
         }
-        self.edit = function (title, detail, id, pageId) {
-            
-            self.remove(id, pageId);
-            self.addNew(title,detail);
+        self.edit = function (data) {
 
+             for(var i = 0; i < self.playlists.length; i++){
+                 if(self.playlists[i].id = data.id){
+                     self.playlists[i] = data;
+                     break;
+                 }
+             }
+            localStorage.setItem('playlists', angular.toJson(self.playlists));
         }
 
     }]);
